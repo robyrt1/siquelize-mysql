@@ -1,0 +1,23 @@
+{
+  "name": "siquelize-mysql",
+  "version": "1.0.0",
+  "main": "./api/index.js",
+  "repository": "https://github.com/robyrt1/sqlnode.git",
+  "author": "robert",
+  "license": "MIT",
+  
+
+  "scripts": {
+    "dev": "nodemon ./api/index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "chalk": "^5.0.1",
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.19",
+    "path": "^0.12.7",
+    "sequelize": "^6.21.3",
+    "sequelize-cli": "^6.4.1"
+  }
+}
