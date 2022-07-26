@@ -12,11 +12,11 @@ Object-Relational Mapping (ORM), em português, mapeamento objeto-relacional, é
   Sequelize é um ORM TypeScript e Node.js moderno para Postgres, MySQL, MariaDB, SQLite e SQL Server e muito mais. Apresentando suporte a transações sólidas, relações, carregamento rápido e lento, replicação de leitura e muito mais.
   </div>
   
-  # Requisitos 
+  ## Requisitos 
    - JavaScript
    - Node.js
   
-  # links Docs
+  #3 links Docs
   
   sequelize : https://sequelize.org/<br>
   Node.js : https://nodejs.org/en/
