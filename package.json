@@ -2,7 +2,7 @@
   "name": "siquelize-mysql",
   "version": "1.0.0",
   "main": "./api/index.js",
-  "repository": "https://github.com/robyrt1/sqlnode.git",
+  "repository": "https://github.com/robyrt1/ORM---sequelize---Node.js.git",
   "author": "robert",
   "license": "MIT",
   
