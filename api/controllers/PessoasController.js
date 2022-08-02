@@ -60,5 +60,5 @@ class PessoaController {
     }
 
 }
-
+// end
 module.exports = PessoaController
