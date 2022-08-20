@@ -1,5 +1,8 @@
 const dataBase = require("../models");
-
+/**
+ *  Controller de um Crud , utilizando no delete que não exclui do banco , mas ocuta ele , tendo a 
+ *   a funcionalidade de restaurar o dado .
+ */
 class PessoaController {
   static async pegaTodasAsPessoas(_req, res) {
     try {
@@ -60,6 +63,16 @@ class PessoaController {
     }
   }
 
+
+  static async restorePerson(req, res) {
+    const { id } = req.params;
+    try{
+      await dataBase.Pessoas.restore({ where: { id: Number(id) } });
+      return res.status(200).json({ message: `id ${id} restaurado`});
+    }catch(error){
+      return res.status(500).json(error.message);
+    }
+  }
   static async pegarUmaMatricula(req, res) {
     const { estudanteId, matriculaId } = req.params;
     try {
