@@ -4,9 +4,20 @@ const dataBase = require("../models");
  *   a funcionalidade de restaurar o dado .
  */
 class PessoaController {
-  static async pegaTodasAsPessoas(_req, res) {
+
+  static async pegaPessoasAtivas(_req, res) {
+
     try {
-      const todasAsPessoas = await dataBase.Pessoas.findAll();
+      const pessoasAtivas = await dataBase.Pessoas.findAll();
+      return res.status(200).json(pessoasAtivas);
+    } catch (err) {
+      return res.status(500).json(error.message);
+    }
+  }
+  static async pegaTodasAsPessoas(_req, res) {
+
+    try {
+      const todasAsPessoas = await dataBase.Pessoas.scope('todos').findAll();
       return res.status(200).json(todasAsPessoas);
     } catch (err) {
       return res.status(500).json(error.message);
