@@ -15,6 +15,8 @@ Object-Relational Mapping (ORM), em português, mapeamento objeto-relacional, é
 Tenho como Objetivo ultilizando ORM:
   - Fazer Conexão com Banco MYSQL (Modelar meu banco Pelo Sequelize);
   - Entidade e Relacionamentos 
+  - Escopo de modelo
+  - Validação de dados / Validação customizado
   - Fazer um CRUD : Creat, Read, Update, Delete;
   - Praticar o Padrão MVC : Model, View e Controller.
   </div>
