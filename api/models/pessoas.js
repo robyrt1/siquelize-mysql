@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Pessoas',
-    paranoid: true,
+    paranoid: true, // exclusão suave de registro 
     defaultScope: {
       where: {ativo : true}
     },

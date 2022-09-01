@@ -1,7 +1,9 @@
 const dataBase = require("../models");
+
 /**
- *  Controller de um Crud , utilizando no delete que não exclui do banco , mas ocuta ele , tendo a
- *   a funcionalidade de restaurar o dado .
+ *  Controller de um Crud ,
+ *  1 requisito : Exibir só os ativos
+ *  2 requisito : Excluir sem deletar do Banco e restaurar quando necessario
  */
 class PessoaController {
   static async pegaPessoasAtivas(_req, res) {
@@ -80,6 +82,8 @@ class PessoaController {
       return res.status(500).json(error.message);
     }
   }
+
+  // MATRICULAS
   static async pegarUmaMatricula(req, res) {
     const { estudanteId, matriculaId } = req.params;
     try {
@@ -141,12 +145,13 @@ class PessoaController {
         where: { id: Number(estudanteId) },
       });
 
-      const matriculas = await pessoa.getAulasMatriculadas()
+      const matriculas = await pessoa.getAulasMatriculadas();
       return res.status(200).json(matriculas);
     } catch (error) {
       return res.status(500).json(error.message);
     }
   }
+
 }
 // end
 module.exports = PessoaController;
