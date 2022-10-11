@@ -1,16 +1,17 @@
-const { Router } = require('express')
-const NiveisController = require('../controllers/NiveisController.js')
 
+const { NiveisController } = require("../controllers/NiveisController");
+const niveisController = new NiveisController();
+
+const {Router} = require("express")
 const router = Router()
 
-router
-    .get('/niveis', NiveisController.pegaTodasOsNiveis)
-    .get('/niveis/:id', NiveisController.buscaID)
-    .post('/niveis/created', NiveisController.createNivel)
-    .put('/niveis/updated', NiveisController.updateNivel)
-    .delete('/niveis/:id', NiveisController.deleteNivel)
+router.get("/niveis", (req, res, next) =>{
+  niveisController.get(req, res, next);
+})
+// const niveisRoutes = (app) => {
+//   app.get("/niveis", function (req, res, next) {
+//     niveisController.get(req, res, next);
+//   });
+// };
 
-module.exports = router;
-
-
-
+module.exports =  router;

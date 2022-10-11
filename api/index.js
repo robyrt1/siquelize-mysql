@@ -1,12 +1,11 @@
-const  express = require('express');
-const routes = require('./routes');
+const { ExpressConfig } = require("./config/express.config");
+const { EnvironmentShared } = require("./shared/environment.shared")
 
-const app = express()
-const port = 3000
-
-routes(app)
-
-app.listen(port, () => console.log('conectado ao servido'))
+const expressConfig = new ExpressConfig()
+const environmentShared = new EnvironmentShared()
+const serverPort = environmentShared.getEnv("SERVER_PORT");
 
 
-module.exports = app
+expressConfig.getServer().listen(serverPort, () =>{
+    console.log(`[INFO] - Server is up running on port "${serverPort}"`)
+}); 

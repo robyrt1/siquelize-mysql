@@ -10,6 +10,8 @@ router.get('/pessoas', PessoaController.pegaTodasAsPessoas)
 router.get('/pessoas/:id', PessoaController.buscaID)
 router.get('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.pegarUmaMatricula)
 router.get('/pessoas/:estudanteId/matricula', PessoaController.pegaMatricula)
+router.get('/pessoas/matricula/:turmaId/confirmadas', PessoaController.pegaMatriculasPorTurma)
+router.get('/pessoas/matricula/lotadas', PessoaController.PegaTurmalotadas)
 // Router de post Pessoas 
 router.post('/pessoas', PessoaController.createPerson)
 router.post('/pessoas/:id/restaura',PessoaController.restorePerson)

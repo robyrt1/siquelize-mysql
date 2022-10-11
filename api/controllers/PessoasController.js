@@ -1,5 +1,5 @@
 const dataBase = require("../models");
-
+const Sequelize = require("sequelize");
 /**
  *  Controller de um Crud ,
  *  1 requisito : Exibir só os ativos
@@ -148,10 +148,48 @@ class PessoaController {
       const matriculas = await pessoa.getAulasMatriculadas();
       return res.status(200).json(matriculas);
     } catch (error) {
+      return res
+        .status(500)
+        .json(
+          "Estudante não encontrado: 1) Estudante sem registrou ou 2) Matricula Cancelada"
+        );
+    }
+  }
+
+  static async pegaMatriculasPorTurma(req, res) {
+    const { turmaId } = req.params;
+    try {
+      const todasAsMatriculas = await dataBase.Matriculas.findAndCountAll({
+        where: {
+          turma_id: Number(turmaId),
+          status: "confirmado",
+        },
+        limit: 20,
+        order: [['estudante_id', 'DESC']],
+      });
+      return res.status(200).json(todasAsMatriculas);
+    } catch (error) {
       return res.status(500).json(error.message);
     }
   }
 
+  static async PegaTurmalotadas(req, res) {
+    const lotacaoTurma = 2;
+    try {
+      const turmasLotadas = await dataBase.Matriculas.findAndCountAll({
+        where: { 
+          status: "confirmado",
+        },
+        attributes : ['turma_id'],
+        grup : ['turma_id'],
+        having : Sequelize.literal(`count(turma_id) >= ${lotacaoTurma}`)
+      });
+
+      return res.status(200).json(turmasLotadas);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
 }
-// end
+
 module.exports = PessoaController;
