@@ -7,7 +7,7 @@ const {
     NOT_FOUND,
   } = require("../shared/constants/http.code")
 
-  const db = require("../models");
+  const database = require("../models");
 
   const { JoiValidator } = require("../shared/validators/niveis/joi.validator")
   const { addValidatorTodoJoiSchema } = require("../shared/validators/niveis/add.validator.niveis.joi.schema")
@@ -18,10 +18,25 @@ class NiveisService {
       this.joiValidator = new JoiValidator();
     }
 
-     get(){
-      const todos =  db.Niveis.findAll();
+    async get(){
+      const todos = await database.Niveis.findAll();
+      console.log(todos);
+      return {statusCode: OK, data: todos}
+    }
+
+    async getById(id){
+      const todos = await database.Niveis.findOne({where: { id: Number(id)}});
+      console.log(todos);
       return {statusCode: OK, data: todos}
     }
 }
 
-module.exports = { NiveisService }
+async function pegaTodasOsNiveis(_req, res){
+  try{
+    const todosOsNiveis = await database.Niveis.findAll();
+    return res.status(200).json(todosOsNiveis);
+  }catch(error){
+    return res.status(500).json(error.message)
+  }
+}
+module.exports = { NiveisService, pegaTodasOsNiveis }

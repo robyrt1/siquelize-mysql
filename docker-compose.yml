@@ -1,0 +1,46 @@
+version: '3'
+
+networks:
+  mysql-nwt:
+    driver: bridge
+  volumes:
+  mysql:
+    
+  # containers 
+
+services:
+  db: 
+    container_name: mysql-sequelize
+    image: mysql:8
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment: 
+      MYSQL_ROOT_PASSWORD: root 
+      MYSQL_DATABASE: escola_ingles
+    volumes:
+      - /var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      -  mysql-nwt
+
+
+  # api:
+  #   container_name: api-sequelize
+  #   build:
+  #     context: './'
+  #     dockerfile: './docker/api.dockerfile'
+  #   volumes:
+  #     - ./:/app
+  #   depends_on:
+  #     - db
+  #   expose:
+  #     - '4000'
+  #   ports:
+  #     - '4000:4000'
+  #   extra_hosts:
+  #      add-host: 127.0.0.1:4000
+  
+  #   networks:
+  #     - mysql-nwt
+      

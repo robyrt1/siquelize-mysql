@@ -1,3 +1,4 @@
+
 const { NiveisService } = require("../services/niveis.service")
 class NiveisController {
   constructor(){
@@ -7,7 +8,12 @@ class NiveisController {
 
    get(req, res, next){
     const result = this.niveisService.get();
-    res.status(result.statusCode).json(result);
+    res.status(result.statusCode).json((result));
+  }
+
+  getById(req, res, next) {
+    const result = this.niveisService.getById(req.params.id);
+    res.status(result.statusCode).json((result));
   }
 
 }
