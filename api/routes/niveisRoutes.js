@@ -1,13 +1,18 @@
 
+const {Router} = require("express");
+const { get } = require("mongoose");
 const { NiveisController } = require("../controllers/NiveisController");
 const niveisController = new NiveisController();
 
-const {Router} = require("express")
-const router = Router()
+const niveisRoutes = Router()
 
-router.get("/niveis", (req, res, next) =>{
+niveisRoutes.get("/niveis", (req, res, next) =>{
   niveisController.get(req, res, next);
 })
 
+niveisRoutes.get("/niveis/:id", (req, res, next) => {
+  niveisController.getById(req, res, next);
+})
 
-module.exports =  router;
+
+module.exports =  niveisRoutes;
