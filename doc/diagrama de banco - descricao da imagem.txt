@@ -3,6 +3,7 @@ Diagrama de banco de dados composto por quatro tabelas: Pessoas, Níveis, Turmas
 A tabela Pessoas é composta pelas colunas:
 ID: dado do tipo inteiro
 nome: dado do tipo string
+cpf: dado do tipo string
 ativo: dado do tipo boolean
 email: dado do tipo string
 role: dado do tipo string

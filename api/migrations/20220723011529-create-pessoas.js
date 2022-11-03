@@ -11,6 +11,9 @@ module.exports = {
       nome: {
         type: Sequelize.STRING
       },
+      cpf: {
+        type: Sequelize.STRING
+      },
       ativo: {
         type: Sequelize.BOOLEAN
       },

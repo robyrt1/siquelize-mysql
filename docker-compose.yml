@@ -34,13 +34,12 @@ services:
   #     - ./:/app
   #   depends_on:
   #     - db
+  #   environment:
+  #     - MYSQL_HOST= api-sequelize
   #   expose:
   #     - '4000'
   #   ports:
   #     - '4000:4000'
-  #   extra_hosts:
-  #      add-host: 127.0.0.1:4000
-  
   #   networks:
   #     - mysql-nwt
       

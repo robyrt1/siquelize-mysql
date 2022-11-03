@@ -1,9 +1,12 @@
 const pessoas = require ('./pessoasRoute.js');
 const niveis  = require ('./niveisRoutes.js');
-// const turmas = require('./turmasRoutes.js')
+const matriculas = require('./matriculasRoutes')
+const turmas = require('./turmasRoutes')
 
 const routes = [
     pessoas,
-    niveis
+    niveis,
+    matriculas,
+    turmas,
 ]
 module.exports = routes;

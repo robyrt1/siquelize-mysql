@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const { todoRoutes } = require("../routes/index.js");
+const routes = require("../routes/index.js");
 
 class ExpressConfig {
   constructor() {
@@ -23,8 +23,10 @@ class ExpressConfig {
   setMiddlewares(middlewares) {
     middlewares.forEach((middleware) => this.getServer().use(middleware));
   }
-  setRoutes(routesContext) {
-    routesContext(this.getServer());
+  setRoutes(routes) {
+    routes.forEach((route) =>{
+      route(this.getServer());
+    });
   }
   setErrorLogHandlers() {
     this.getServer().use(function (error, req, res , next){
@@ -42,7 +44,7 @@ class ExpressConfig {
     ];
 
     this.setMiddlewares(middleware);
-    this.setRoutes(todoRoutes);
+    this.setRoutes(routes);
     this.setErrorLogHandlers();
   }
 }

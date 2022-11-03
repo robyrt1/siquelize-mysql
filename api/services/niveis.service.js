@@ -23,37 +23,70 @@ class NiveisService {
   }
 
   async get() {
-    const todos = await database.Niveis.findAll();
-    console.log(todos);
-    return { statusCode: OK, data: todos };
+    try {
+      const todos = await database.Niveis.findAll();
+      console.log(todos);
+      return { statusCode: OK, data: todos };
+    } catch (err) {
+      return {
+        statusCode: INTERNAL_SERVER_ERROR,
+        error: `Internal Server`,
+        msg: console.log("[ERROR] - ", err),
+      };
+    }
   }
 
   async getById(id) {
-    const todos = await database.Niveis.findOne({ where: { id: Number(id) } });
-    return { statusCode: OK, data: todos };
+    try {
+      const todos = await database.Niveis.findOne({
+        where: { id: Number(id) },
+      });
+      return { statusCode: OK, data: todos };
+    } catch (err) {
+      return {
+        statusCode: INTERNAL_SERVER_ERROR,
+        error: `Internal Server`,
+        msg: console.log("[ERROR] - ", err),
+      };
+    }
   }
 
   async getByDesc({ desc_nivel }) {
-    const result = await database.Niveis.findOne({ where: { desc_nivel } });
-    return { statusCode: OK, data: result };
+    try {
+      const result = await database.Niveis.findOne({ where: { desc_nivel } });
+      return { statusCode: OK, data: result };
+    } catch (err) {
+      return {
+        statusCode: INTERNAL_SERVER_ERROR,
+        error: `Internal Server`,
+        msg: console.log("[ERROR] - ", err),
+      };
+    }
   }
 
   async add(body) {
     this.joiValidator.validate(addValidatorTodoJoiSchema, body);
     const niveisFromDB = await this.getByDesc(body);
-
     // console.log("!!niveisFromDB?.dataValue", !!niveisFromDB?.dataValue);
     if (niveisFromDB.data) {
       return { statusCode: BAD_REQUEST, error: `Levels already exist` };
     }
 
-    const result = await database.Niveis.create(body);
+    try {
+      const result = await database.Niveis.create(body);
 
-    // console.log("result.affectedRows > 0 ? ", result.affectedRows > 0)
-    const data =
-      !result.affectedRows > 0 ? "todo inserted" : "todo was not inserted";
+      // console.log("result.affectedRows > 0 ? ", result.affectedRows > 0)
+      const data =
+        !result.affectedRows > 0 ? "todo inserted" : "todo was not inserted";
 
-    return { statusCode: CREATED, data };
+      return { statusCode: CREATED, data };
+    } catch (err) {
+      return {
+        statusCode: INTERNAL_SERVER_ERROR,
+        error: `Internal Server`,
+        msg: console.log("[ERROR] - ", err),
+      };
+    }
   }
 
   async updateById(id, body) {
@@ -63,10 +96,17 @@ class NiveisService {
     if (!checkNiveisId.data) {
       return { statusCode: BAD_REQUEST, error: `does not exist` };
     }
+    try {
+      await database.Niveis.update(body, { where: { id: Number(id) } });
 
-    await database.Niveis.update(body, { where: { id: Number(id) } });
-
-    return { statusCode: NO_CONTENT, data: undefined };
+      return { statusCode: NO_CONTENT, data: undefined };
+    } catch (err) {
+      return {
+        statusCode: INTERNAL_SERVER_ERROR,
+        error: `Internal Server`,
+        msg: console.log("[ERROR] - ", err),
+      };
+    }
   }
 
   async removeById(id) {
@@ -75,10 +115,17 @@ class NiveisService {
     if (!checkNiveisId.data) {
       return { statusCode: BAD_REQUEST, error: `does not exist` };
     }
+    try {
+      await database.Niveis.destroy({ where: { id: Number(id) } });
 
-    await database.Niveis.destroy({where:{id:Number(id)}});
-
-    return {statusCode: NO_CONTENT, data: undefined}
+      return { statusCode: NO_CONTENT, data: undefined };
+    } catch (err) {
+      return {
+        statusCode: INTERNAL_SERVER_ERROR,
+        error: `Internal Server`,
+        msg: console.log("[ERROR] - ", err),
+      };
+    }
   }
 }
 

@@ -7,6 +7,7 @@ module.exports = {
       {
         nome: 'John Doe',
         ativo: true,
+        cpf: 78945612303,
         email:'john@gmail.com',
         role:'estudante',
         createdAt: new Date(),
@@ -16,6 +17,7 @@ module.exports = {
       {
         nome: 'Marcos Cintra',
         ativo: true,
+        cpf: 79846513220,
         email:'marcos@gmail.com',
         role:'estudante',
         createdAt: new Date(),
@@ -24,6 +26,7 @@ module.exports = {
       {
         nome: 'Felipe Cardose',
         ativo: true,
+        cpf: 89756423115,
         email:'felipe@gmail.com',
         role:'estudante',
         createdAt: new Date(),
@@ -32,6 +35,7 @@ module.exports = {
       {
         nome: 'Sandra Gomes',
         ativo: true,
+        cpf: 12345678995,
         email:'sandra@gmail.com',
         role:'estudante',
         createdAt: new Date(),
@@ -40,6 +44,7 @@ module.exports = {
       {
         nome: 'Ana Souza ',
         ativo: true,
+        cpf: 153145678960,
         email:'ana@gmail.com',
         role:'estudante',
         createdAt: new Date(),

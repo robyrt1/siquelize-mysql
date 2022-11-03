@@ -1,29 +1,43 @@
-const { Router } = require('express')
-const PessoaController = require('../controllers/PessoasController.js')
+const { PessoasController } = require("../controllers/PessoasController.js");
+const pessoasController = new PessoasController();
 
+const pessoasRoutes = (app) => {
+  // Router de gets Pessoas
+  app.get("/pessoas", (req, res, next) => {
+    pessoasController.get(req, res, next);
+  });
 
-const router = Router() 
+  app.get("/pessoas/active", (req, res, next) => {
+    pessoasController.getActive(req, res, next);
+  });
 
-// Router de gets Pessoas
-router.get('/pessoas/ativas', PessoaController.pegaPessoasAtivas)
-router.get('/pessoas', PessoaController.pegaTodasAsPessoas)
-router.get('/pessoas/:id', PessoaController.buscaID)
-router.get('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.pegarUmaMatricula)
-router.get('/pessoas/:estudanteId/matricula', PessoaController.pegaMatricula)
-router.get('/pessoas/matricula/:turmaId/confirmadas', PessoaController.pegaMatriculasPorTurma)
-router.get('/pessoas/matricula/lotadas', PessoaController.PegaTurmalotadas)
-// Router de post Pessoas 
-router.post('/pessoas', PessoaController.createPerson)
-router.post('/pessoas/:id/restaura',PessoaController.restorePerson)
-router.post('/pessoas/:estudanteId/matricula', PessoaController.createMatricula)
+  app.get("/pessoas/:id", (req, res, next) => {
+    pessoasController.getById(req, res, next);
+  });
 
-// Router de Put Pessoas 
-router.put('/pessoas/:id', PessoaController.updatePerson)
-router.put('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.updateMatricula)
-// Router de Delete Pessoas
-router.delete('/pessoas/:id', PessoaController.deletePerson)
-router.delete('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.deleteMatricula)
+  // app de post Pessoas
+  app.post("/pessoas", (req, res, next) => {
+    pessoasController.add(req, res, next);
+  });
 
+  app.post("/pessoas/:id/restaura", (req, res, next) => {
+    pessoasController.restoreById(req, res, next);
+  });
 
-module.exports = router
+  // app de Put Pessoas
+  app.put("/pessoas/:id", (req, res, next) => {
+    pessoasController.updateById(req, res, next);
+  });
 
+  // app de Delete Pessoas
+  app.delete("/pessoas/:id", (req, res, next) => {
+    pessoasController.removeById(req, res, next);
+    1;
+  });
+
+  app.get("/pessoas/estudante/:estudanteId", (req, res, next) =>{
+    pessoasController.getByIdMatriculaActive(req, res, next);
+  })
+};
+
+module.exports = pessoasRoutes;
